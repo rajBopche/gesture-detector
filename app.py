@@ -82,6 +82,10 @@ st.markdown(
     .pill span {
         opacity: 0.8;
     }
+    
+    .stAppDeployButton {
+        visibility: hidden;
+    }
 
     .stCheckbox > div {
         gap: 0.45rem;
@@ -126,30 +130,11 @@ st.markdown(
 if "last_spoken" not in st.session_state:
     st.session_state.last_spoken = ""
 
-if "confidence_history" not in st.session_state:
-    st.session_state.confidence_history = []
-
-if "prediction_history" not in st.session_state:
-    st.session_state.prediction_history = []
-
 if "camera_running" not in st.session_state:
     st.session_state.camera_running = False
 
-# ---------------- Model + Gesture List ----------------
+# ---------------- Model ----------------
 model = joblib.load("gesture_model.pkl")
-
-gesture_list = []
-if os.path.isdir("dataset"):
-    try:
-        gesture_list = sorted(
-            [
-                d
-                for d in os.listdir("dataset")
-                if os.path.isdir(os.path.join("dataset", d))
-            ]
-        )
-    except Exception:
-        gesture_list = []
 
 # ---------------- Header ----------------
 with st.container():
