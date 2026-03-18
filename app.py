@@ -42,25 +42,6 @@ st.markdown(
         font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    .glass-card {
-        background: var(--card);
-        border: 1px solid var(--card-border);
-        border-radius: 20px;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
-        backdrop-filter: blur(16px);
-        padding: 1.2rem;
-        transition: transform 0.18s ease, box-shadow 0.18s ease;
-    }
-
-    .glass-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 26px 60px rgba(0, 0, 0, 0.55);
-    }
-
-    .glass-card small {
-        color: var(--muted);
-    }
-
     .header {
         text-align: center;
         padding: 1.5rem 0 0.75rem;
@@ -190,21 +171,19 @@ with main_col:
         # Controls + status
         cols = st.columns([1, 1.1, 1])
         with cols[0]:
-            run = st.checkbox("Start camera", value=st.session_state.camera_running)
-            st.session_state.camera_running = run
+            label = "Stop Camera" if st.session_state.camera_running else "Start Camera"
+            if st.button(label):
+                st.session_state.camera_running = not st.session_state.camera_running
+                st.rerun()  # Forces an immediate refresh to update the UI
 
     frame_container = st.container()
 
     with frame_container:
-        st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
         frame_placeholder = st.empty()
-        st.markdown("</div>", unsafe_allow_html=True)
 
     right_panel = st.container()
 
     with right_panel:
-        st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
-
         st.markdown("## Prediction")
         prediction_text = st.empty()
         confidence_text = st.empty()
@@ -226,8 +205,6 @@ with main_col:
                 "<small><em>No gestures found in dataset/</em></small>",
                 unsafe_allow_html=True,
             )
-
-        st.markdown("</div>", unsafe_allow_html=True)
 
 # ---------------- MediaPipe Setup ----------------
 mp_hands = mp.solutions.hands
