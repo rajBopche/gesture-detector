@@ -77,8 +77,10 @@ st.markdown(
 
     .header p {
         margin: 0.35rem auto 0;
-        color: var(--muted);
         max-width: 680px;
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         font-size: 1.05rem;
         line-height: 1.55;
     }
@@ -174,7 +176,7 @@ with st.container():
         """
         <div class='header'>
             <h1>🤖 AI Sign Language Assistant</h1>
-            <p>Point your hands at the camera and let the model translate sign language into text (and speech). Modern UI, clean layout, and live feedback.</p>
+            <p>Point your hands at the camera and let the model translate sign language into text (and speech).</p>
         </div>
         """,
         unsafe_allow_html=True,
@@ -190,18 +192,6 @@ with main_col:
         with cols[0]:
             run = st.checkbox("Start camera", value=st.session_state.camera_running)
             st.session_state.camera_running = run
-
-        with cols[1]:
-            st.markdown(
-                "<div class='pill'><span>Mode</span><strong>Live</strong></div>",
-                unsafe_allow_html=True,
-            )
-
-        with cols[2]:
-            st.markdown(
-                "<div class='pill'><span>Frames</span><strong>30+</strong></div>",
-                unsafe_allow_html=True,
-            )
 
     frame_container = st.container()
 
