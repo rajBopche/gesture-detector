@@ -149,17 +149,19 @@ with st.container():
     )
 
 # ---------------- Layout ----------------
-left_spacer, main_col, right_spacer = st.columns([1, 7, 1])
+left_spacer, main_col, right_spacer = st.columns([1, 8, 1])
 
 with main_col:
     with st.container():
         # Controls + status
-        cols = st.columns([1, 1.1, 1])
-        with cols[0]:
+        btn_col1, btn_col2 = st.columns(2)
+        with btn_col1:
             label = "Stop Camera" if st.session_state.camera_running else "Start Camera"
             if st.button(label, type="primary", icon="📷", use_container_width=True):
                 st.session_state.camera_running = not st.session_state.camera_running
                 st.rerun()  # Forces an immediate refresh to update the UI
+        with btn_col2:
+            st.button("Gestures", type="secondary", icon="👋", use_container_width=True)
 
     frame_container = st.container()
 
