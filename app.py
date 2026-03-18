@@ -172,7 +172,7 @@ with main_col:
         cols = st.columns([1, 1.1, 1])
         with cols[0]:
             label = "Stop Camera" if st.session_state.camera_running else "Start Camera"
-            if st.button(label):
+            if st.button(label, type="primary", icon="📷", use_container_width=True):
                 st.session_state.camera_running = not st.session_state.camera_running
                 st.rerun()  # Forces an immediate refresh to update the UI
 
@@ -180,31 +180,6 @@ with main_col:
 
     with frame_container:
         frame_placeholder = st.empty()
-
-    right_panel = st.container()
-
-    with right_panel:
-        st.markdown("## Prediction")
-        prediction_text = st.empty()
-        confidence_text = st.empty()
-
-        st.markdown("---")
-        st.markdown("## Confidence (recent)")
-        chart = st.line_chart([], height=200)
-
-        st.markdown("---")
-        st.markdown("## Gestures")
-
-        if gesture_list:
-            cols = st.columns(3)
-            for idx, gesture in enumerate(gesture_list):
-                with cols[idx % 3]:
-                    st.markdown(f"<small>• {gesture}</small>", unsafe_allow_html=True)
-        else:
-            st.markdown(
-                "<small><em>No gestures found in dataset/</em></small>",
-                unsafe_allow_html=True,
-            )
 
 # ---------------- MediaPipe Setup ----------------
 mp_hands = mp.solutions.hands
@@ -296,33 +271,6 @@ if st.session_state.camera_running:
             if gesture != st.session_state.last_spoken:
                 engine.say(gesture)
                 engine.runAndWait()
-                st.session_state.last_spoken = gesture
-
-            # ---------------- UI Updates ----------------
-            st.session_state.prediction_history.append(gesture)
-            st.session_state.confidence_history.append(confidence)
-
-            # keep recent window
-            if len(st.session_state.confidence_history) > 40:
-                st.session_state.confidence_history = (
-                    st.session_state.confidence_history[-40:]
-                )
-
-            if len(st.session_state.prediction_history) > 40:
-                st.session_state.prediction_history = (
-                    st.session_state.prediction_history[-40:]
-                )
-
-            prediction_text.markdown(
-                f"<h2 style='margin:0; padding:0;'>{gesture}</h2>",
-                unsafe_allow_html=True,
-            )
-            confidence_text.markdown(
-                f"<p style='margin:0.15rem 0 0; color: var(--muted)'>Confidence: <strong>{confidence:.2f}</strong></p>",
-                unsafe_allow_html=True,
-            )
-
-            chart.add_rows({"confidence": st.session_state.confidence_history[-1:]})
 
         frame_placeholder.image(frame, channels="BGR")
 
