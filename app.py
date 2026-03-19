@@ -16,6 +16,13 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="collapsed",
 )
+pg = st.navigation(["gestures.py"])
+
+
+def showGestures():
+    with main_col:
+        pg.run()
+
 
 # ---------------- CSS (dark / modern) ----------------
 st.markdown(
@@ -161,7 +168,10 @@ with main_col:
                 st.session_state.camera_running = not st.session_state.camera_running
                 st.rerun()  # Forces an immediate refresh to update the UI
         with btn_col2:
-            st.button("Gestures", type="secondary", icon="👋", use_container_width=True)
+            if st.button(
+                "Gestures", type="secondary", icon="👋", use_container_width=True
+            ):
+                showGestures()
 
     frame_container = st.container()
 

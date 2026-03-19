@@ -1,0 +1,129 @@
+import streamlit as st
+
+st.set_page_config(page_title="Gesture Cards", layout="centered")
+
+st.markdown(
+    """
+<style>
+.card-container {
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    padding: 14px;
+    margin-bottom: 18px;
+    border: 1px solid rgba(100, 116, 139, 0.15);
+}
+.card-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+.card-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+}
+.card-content {
+    padding: 2px 0;
+}
+.card-title {
+    margin: 0;
+    color: #0f172a;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+.card-desc {
+    color: #475569;
+    margin: 6px 0 0;
+    font-size: 0.94rem;
+    line-height: 1.4;
+}
+.card-action {
+    display: flex;
+    justify-content: center;
+}
+</style>
+""",
+    unsafe_allow_html=True,
+)
+
+st.title("Gesture Cards List")
+
+import random
+
+random_titles = [
+    "Cascade Flux",
+    "Nebula Drift",
+    "Prismatic Surge",
+    "Quantum Bloom",
+    "Aurora Angle",
+    "Vertex Pulse",
+    "Echo Tide",
+    "Vortex Whisper",
+]
+
+mock_cards = [
+    {
+        "id": "card_1",
+        "title": random.choice(random_titles),
+        "description": "Detect left-to-right swipe gestures and trigger navigation actions.",
+        "image": "https://picsum.photos/seed/swipe-left/180/120",
+        "button": "View",
+    },
+    {
+        "id": "card_2",
+        "title": random.choice(random_titles),
+        "description": "Handle right-to-left swipes to reveal controls and options.",
+        "image": "https://picsum.photos/seed/swipe-right/180/120",
+        "button": "View",
+    },
+    {
+        "id": "card_3",
+        "title": random.choice(random_titles),
+        "description": "Support pinch-to-zoom gesture recognition for detail inspection.",
+        "image": "https://picsum.photos/seed/pinch-zoom/180/120",
+        "button": "View",
+    },
+    {
+        "id": "card_4",
+        "title": random.choice(random_titles),
+        "description": "Long-press and hold gestures for context menus and tools.",
+        "image": "https://picsum.photos/seed/hold-press/180/120",
+        "button": "View",
+    },
+]
+
+st.write("### Look at all gesture cards below:")
+
+for card_data in mock_cards:
+    with st.container():
+        c1, c2, c3 = st.columns([1, 3, 1], gap="small")
+
+        with c1:
+            st.markdown(
+                f"""
+                <div class='card-image'><img src='{card_data['image']}' alt='{card_data['title']}' /></div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+        with c2:
+            st.markdown(
+                f"""
+                <div class='card-content'>
+                    <div class='card-title'>{card_data['title']}</div>
+                    <div class='card-desc'>{card_data['description']}</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+        with c3:
+            st.button(card_data["button"], key=card_data["id"])
+
+    st.markdown(
+        "<hr style='border: .5px solid rgba(148, 163, 184, 0.35);'>",
+        unsafe_allow_html=True,
+    )
