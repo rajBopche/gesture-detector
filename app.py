@@ -1,3 +1,4 @@
+import base64
 import os
 
 import cv2
@@ -38,15 +39,11 @@ st.markdown(
         --accent2: #3bf0ff;
     }
 
-    body {
-        background: radial-gradient(circle at top, #141b2d 0%, #050912 55%, #02040a 100%);
-        color: var(--text);
-    }
-
     .stApp {
         padding-top: 1.4rem;
         padding-bottom: 2rem;
         font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background-color: #000000;
     }
 
     .header {
@@ -102,6 +99,21 @@ st.markdown(
         font-size: 1rem;
         font-weight: 600;
     }
+    
+    #MainMenu {
+        visibility: hidden;
+    }
+    
+    footer {
+        visibility: hidden;
+    }
+        
+    header {
+        visibility: hidden
+    }
+    
+    #root > div:nth-child(1) > div > div > div > div > section > div {padding-top: 0rem;}
+
 
     .stButton button {
         border-radius: 999px;

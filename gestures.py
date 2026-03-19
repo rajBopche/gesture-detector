@@ -1,6 +1,7 @@
 import streamlit as st
+import random
 
-st.set_page_config(page_title="Gesture Cards", layout="centered")
+st.set_page_config(page_title="Gesture Cards", layout="wide")
 
 st.markdown(
     """
@@ -49,9 +50,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-st.title("Gesture Cards List")
-
-import random
 
 random_titles = [
     "Cascade Flux",
@@ -70,32 +68,86 @@ mock_cards = [
         "title": random.choice(random_titles),
         "description": "Detect left-to-right swipe gestures and trigger navigation actions.",
         "image": "https://picsum.photos/seed/swipe-left/180/120",
-        "button": "View",
+        "button": "Try Now",
     },
     {
         "id": "card_2",
         "title": random.choice(random_titles),
         "description": "Handle right-to-left swipes to reveal controls and options.",
         "image": "https://picsum.photos/seed/swipe-right/180/120",
-        "button": "View",
+        "button": "Try Now",
     },
     {
         "id": "card_3",
         "title": random.choice(random_titles),
         "description": "Support pinch-to-zoom gesture recognition for detail inspection.",
         "image": "https://picsum.photos/seed/pinch-zoom/180/120",
-        "button": "View",
+        "button": "Try Now",
     },
     {
         "id": "card_4",
         "title": random.choice(random_titles),
         "description": "Long-press and hold gestures for context menus and tools.",
         "image": "https://picsum.photos/seed/hold-press/180/120",
-        "button": "View",
+        "button": "Try Now",
+    },
+    {
+        "id": "card_11",
+        "title": random.choice(random_titles),
+        "description": "Detect left-to-right swipe gestures and trigger navigation actions.",
+        "image": "https://picsum.photos/seed/swipe-left/180/120",
+        "button": "Try Now",
+    },
+    {
+        "id": "card_21",
+        "title": random.choice(random_titles),
+        "description": "Handle right-to-left swipes to reveal controls and options.",
+        "image": "https://picsum.photos/seed/swipe-right/180/120",
+        "button": "Try Now",
+    },
+    {
+        "id": "card_31",
+        "title": random.choice(random_titles),
+        "description": "Support pinch-to-zoom gesture recognition for detail inspection.",
+        "image": "https://picsum.photos/seed/pinch-zoom/180/120",
+        "button": "Try Now",
+    },
+    {
+        "id": "card_41",
+        "title": random.choice(random_titles),
+        "description": "Long-press and hold gestures for context menus and tools.",
+        "image": "https://picsum.photos/seed/hold-press/180/120",
+        "button": "Try Now",
+    },
+    {
+        "id": "card_111",
+        "title": random.choice(random_titles),
+        "description": "Detect left-to-right swipe gestures and trigger navigation actions.",
+        "image": "https://picsum.photos/seed/swipe-left/180/120",
+        "button": "Try Now",
+    },
+    {
+        "id": "card_211",
+        "title": random.choice(random_titles),
+        "description": "Handle right-to-left swipes to reveal controls and options.",
+        "image": "https://picsum.photos/seed/swipe-right/180/120",
+        "button": "Try Now",
+    },
+    {
+        "id": "card_311",
+        "title": random.choice(random_titles),
+        "description": "Support pinch-to-zoom gesture recognition for detail inspection.",
+        "image": "https://picsum.photos/seed/pinch-zoom/180/120",
+        "button": "Try Now",
+    },
+    {
+        "id": "card_411",
+        "title": random.choice(random_titles),
+        "description": "Long-press and hold gestures for context menus and tools.",
+        "image": "https://picsum.photos/seed/hold-press/180/120",
+        "button": "Try Now",
     },
 ]
-
-st.write("### Look at all gesture cards below:")
 
 for card_data in mock_cards:
     with st.container():
@@ -121,7 +173,7 @@ for card_data in mock_cards:
             )
 
         with c3:
-            st.button(card_data["button"], key=card_data["id"])
+            st.button(card_data["button"], key=card_data["id"], type="primary")
 
     st.markdown(
         "<hr style='border: .5px solid rgba(148, 163, 184, 0.35);'>",
