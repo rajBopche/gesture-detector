@@ -6,6 +6,37 @@ st.set_page_config(page_title="Gesture Cards", layout="wide")
 st.markdown(
     """
 <style>
+    .stApp {
+        padding-top: 1.4rem;
+        padding-bottom: 2rem;
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background-color: #000000;
+    }
+    .stAppDeployButton {
+        visibility: hidden;
+    }
+    #MainMenu {
+        visibility: hidden;
+    }
+    header {
+        background-color: #000000 !important;
+    }
+    .stButton button {
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(124, 92, 255, 0.15);
+        color: var(--text);
+        font-weight: 600;
+        padding: 0.65rem 1.1rem;
+    }
+    .stButton button:hover {
+        background: rgba(124, 92, 255, 0.32);
+    }
+    [data-testid="stSidebarNavItems"] span {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: 500;
+        color: #f0f2f6;
+    }
 .card-container {
     background: #ffffff;
     border-radius: 14px;
@@ -173,7 +204,8 @@ for card_data in mock_cards:
             )
 
         with c3:
-            st.button(card_data["button"], key=card_data["id"], type="primary")
+            if st.button(card_data["button"], key=card_data["id"], type="primary"):
+                st.switch_page("camera.py")
 
     st.markdown(
         "<hr style='border: .5px solid rgba(148, 163, 184, 0.35);'>",
