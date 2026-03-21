@@ -31,12 +31,12 @@ st.markdown(
 }
 .card-title {
     margin: 0;
-    color: #0f172a;
+    color: #ffffff;
     font-size: 1.05rem;
-    font-weight: 700;
+    font-weight: 500;
 }
 .card-desc {
-    color: #475569;
+    color: #ffffff;
     margin: 6px 0 0;
     font-size: 0.94rem;
     line-height: 1.4;

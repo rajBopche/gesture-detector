@@ -17,7 +17,7 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="collapsed",
 )
-pg = st.navigation(["gestures.py"])
+pg = st.navigation(["gestures.py", "app.py"])
 
 
 def showGestures():
@@ -206,7 +206,7 @@ pose = mp_pose.Pose()
 
 # ---------------- Camera ----------------
 if st.session_state.camera_running:
-    camera = cv2.VideoCapture(1)
+    camera = cv2.VideoCapture(0)
 
     camera.set(cv2.CAP_PROP_FRAME_WIDTH, 960)
     camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
