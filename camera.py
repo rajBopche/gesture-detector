@@ -271,9 +271,10 @@ if st.session_state.camera_running:
                 2,
             )
 
-            if gesture != st.session_state.last_spoken:
+            if gesture != st.session_state.last_spoken and confidence > 0.7:
                 engine.say(gesture)
                 engine.runAndWait()
+                st.session_state.last_spoken = gesture
 
         frame_placeholder.image(frame, channels="BGR")
 
