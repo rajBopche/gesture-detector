@@ -1,12 +1,14 @@
 import base64
 import os
-
+import uuid
 import cv2
 import joblib
 import mediapipe as mp
 import numpy as np
 import pyttsx3
 import streamlit as st
+import json
+from streamlit_lottie import st_lottie
 
 # ---------------- Voice Setup ----------------
 engine = pyttsx3.init()
@@ -161,9 +163,15 @@ with st.container():
         unsafe_allow_html=True,
     )
 
+
+# ---------------- Animation ----------------
+def load_lottiefile(filepath: str):
+    with open(filepath, "r") as f:
+        return json.load(f)
+
+
 # ---------------- Layout ----------------
 left_spacer, main_col, right_spacer = st.columns([1, 8, 1])
-
 with main_col:
     with st.container():
         # Controls + status
@@ -178,6 +186,13 @@ with main_col:
                 "Gestures", type="secondary", icon="👋", use_container_width=True
             ):
                 st.switch_page("gestures.py")
+        lottie_container = st.empty()
+        if not st.session_state.camera_running:
+            with lottie_container:
+                lottie_local = load_lottiefile("./anim.json")
+                st_lottie(lottie_local, height=720, width=960, key="animation")
+        else:
+            lottie_container.empty()
 
     frame_container = st.container()
 
