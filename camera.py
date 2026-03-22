@@ -157,8 +157,7 @@ with st.container():
     st.markdown(
         """
         <div class='header'>
-            <h1>🤖 AI Sign Language Assistant</h1>
-            <p>Point your hands at the camera and let the model translate sign language into text (and speech).</p>
+            <h1>AI Sign Language Assistant</h1>
         </div>
         """,
         unsafe_allow_html=True,
@@ -175,6 +174,15 @@ def load_lottiefile(filepath: str):
 left_spacer, main_col, right_spacer = st.columns([1, 8, 1])
 with main_col:
     with st.container():
+        frame_placeholder = st.empty()
+        if not st.session_state.camera_running:
+            frame_placeholder = st_lottie(
+                load_lottiefile("./anim.json"), height=600, key="animation"
+            )
+        else:
+            frame_placeholder.empty()
+            frame_placeholder.container(height=600)
+    with st.container():
         btn_col1, btn_col2 = st.columns(2)
         with btn_col1:
             label = "Stop Camera" if st.session_state.camera_running else "Start Camera"
@@ -186,18 +194,6 @@ with main_col:
                 "Gestures", type="secondary", icon="👋", use_container_width=True
             ):
                 st.switch_page("gestures.py")
-        lottie_container = st.empty()
-        if not st.session_state.camera_running:
-            with lottie_container:
-                lottie_local = load_lottiefile("./anim.json")
-                st_lottie(lottie_local, height=720, key="animation")
-        else:
-            lottie_container.empty()
-
-    frame_container = st.container()
-
-    with frame_container:
-        frame_placeholder = st.empty()
 
 # ---------------- MediaPipe Setup ----------------
 mp_hands = mp.solutions.hands
