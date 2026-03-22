@@ -150,6 +150,7 @@ if "camera_running" not in st.session_state:
 
 # ---------------- Model ----------------
 model = joblib.load("gesture_model.pkl")
+model_1 = joblib.load("model_1hand.pkl")
 
 # ---------------- Header ----------------
 with st.container():
@@ -244,6 +245,7 @@ if st.session_state.camera_running:
 
         # ---------------- Hand Detection ----------------
         if hand_result.multi_hand_landmarks and hand_result.multi_handedness:
+            hand_count = len(hand_result.multi_hand_landmarks)
             for hand_landmarks, hand_info in zip(
                 hand_result.multi_hand_landmarks, hand_result.multi_handedness
             ):
@@ -264,6 +266,53 @@ if st.session_state.camera_running:
                     right_hand = landmarks
 
         # ---------------- AI Prediction ----------------
+
+        if left_hand is not None and right_hand is None:
+            full_landmarks = left_hand
+            prediction = model_1.predict([full_landmarks])
+            gesture = prediction[0]
+            if hasattr(model_1, "predict_proba"):
+                confidence = np.max(model_1.predict_proba([full_landmarks]))
+            else:
+                confidence = 1.0
+            cv2.putText(
+                frame,
+                f"{gesture} ({confidence:.2f})",
+                (10, 50),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                1,
+                (0, 255, 0),
+                2,
+            )
+
+            if gesture != st.session_state.last_spoken and confidence > 0.7:
+                engine.say(gesture)
+                engine.runAndWait()
+                st.session_state.last_spoken = gesture
+
+        if right_hand is not None and left_hand is None:
+            full_landmarks = right_hand
+            prediction = model_1.predict([full_landmarks])
+            gesture = prediction[0]
+            if hasattr(model_1, "predict_proba"):
+                confidence = np.max(model_1.predict_proba([full_landmarks]))
+            else:
+                confidence = 1.0
+            cv2.putText(
+                frame,
+                f"{gesture} ({confidence:.2f})",
+                (10, 50),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                1,
+                (0, 255, 0),
+                2,
+            )
+
+            if gesture != st.session_state.last_spoken and confidence > 0.7:
+                engine.say(gesture)
+                engine.runAndWait()
+                st.session_state.last_spoken = gesture
+
         if left_hand is not None and right_hand is not None:
             full_landmarks = left_hand + right_hand
 

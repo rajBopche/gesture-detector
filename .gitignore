@@ -62,6 +62,7 @@ logs/
 
 # Model artifacts / data artifacts (optional)
 gesture_model.pkl
+model_1hand.pkl
 gesture_dataset.csv
 dataset/
 
