@@ -24,7 +24,7 @@ st.markdown(
     .stButton button {
         border-radius: 999px;
         border: 1px solid rgba(255, 255, 255, 0.18);
-        background: rgba(124, 92, 255, 0.15);
+        background: #0f1116;
         color: var(--text);
         font-weight: 600;
         padding: 0.65rem 1.1rem;
@@ -204,7 +204,7 @@ for card_data in mock_cards:
             )
 
         with c3:
-            if st.button(card_data["button"], key=card_data["id"], type="primary"):
+            if st.button(card_data["button"], key=card_data["id"]):
                 st.switch_page("camera.py")
 
     st.markdown(

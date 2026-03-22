@@ -48,7 +48,7 @@ st.markdown(
     }
 
     .header h1 {
-        font-size: 2.6rem;
+        font-size: 48px !important;;
         margin: 0;
         letter-spacing: 0.02em;
         background: linear-gradient(90deg, var(--accent), var(--accent2));
@@ -114,7 +114,7 @@ st.markdown(
     .stButton button {
         border-radius: 999px;
         border: 1px solid rgba(255, 255, 255, 0.18);
-        background: rgba(124, 92, 255, 0.15);
+        background: #0f1116;
         color: var(--text);
         font-weight: 600;
         padding: 0.65rem 1.1rem;
@@ -122,6 +122,14 @@ st.markdown(
 
     .stButton button:hover {
         background: rgba(124, 92, 255, 0.32);
+    }
+    
+    .st-key-home-btn-cam button p {
+        font-size: 24px !important;
+    }
+    
+    .st-key-home-btn-ges button p {
+        font-size: 24px !important;
     }
 
     .stMarkdown h2 {
@@ -186,12 +194,14 @@ with main_col:
         btn_col1, btn_col2 = st.columns(2)
         with btn_col1:
             label = "Stop Camera" if st.session_state.camera_running else "Start Camera"
-            if st.button(label, type="primary", icon="📷", use_container_width=True):
+            if st.button(
+                label, icon="📷", use_container_width=True, key="home-btn-cam"
+            ):
                 st.session_state.camera_running = not st.session_state.camera_running
                 st.rerun()  # Forces an immediate refresh to update the UI
         with btn_col2:
             if st.button(
-                "Gestures", type="secondary", icon="👋", use_container_width=True
+                "Gestures", icon="👋", use_container_width=True, key="home-btn-ges"
             ):
                 st.switch_page("gestures.py")
 
