@@ -10,7 +10,7 @@ st.markdown(
         padding-top: 1.4rem;
         padding-bottom: 2rem;
         font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background-color: #000000;
+        background-color: #0f1116;
     }
     .stAppDeployButton {
         visibility: hidden;
@@ -19,7 +19,7 @@ st.markdown(
         visibility: hidden;
     }
     header {
-        background-color: #000000 !important;
+        background-color: #0f1116 !important;
     }
     .stButton button {
         border-radius: 999px;

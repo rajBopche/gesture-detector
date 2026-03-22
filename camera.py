@@ -39,7 +39,7 @@ st.markdown(
         padding-top: 1.4rem;
         padding-bottom: 2rem;
         font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background-color: #000000;
+        background-color: #0f1116;
     }
 
     .header {
@@ -174,7 +174,6 @@ def load_lottiefile(filepath: str):
 left_spacer, main_col, right_spacer = st.columns([1, 8, 1])
 with main_col:
     with st.container():
-        # Controls + status
         btn_col1, btn_col2 = st.columns(2)
         with btn_col1:
             label = "Stop Camera" if st.session_state.camera_running else "Start Camera"
@@ -190,7 +189,7 @@ with main_col:
         if not st.session_state.camera_running:
             with lottie_container:
                 lottie_local = load_lottiefile("./anim.json")
-                st_lottie(lottie_local, height=720, width=960, key="animation")
+                st_lottie(lottie_local, height=720, key="animation")
         else:
             lottie_container.empty()
 
