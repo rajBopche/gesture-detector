@@ -1,3 +1,5 @@
+import base64
+
 import streamlit as st
 import random
 
@@ -82,103 +84,65 @@ st.markdown(
 )
 
 
-random_titles = [
-    "Cascade Flux",
-    "Nebula Drift",
-    "Prismatic Surge",
-    "Quantum Bloom",
-    "Aurora Angle",
-    "Vertex Pulse",
-    "Echo Tide",
-    "Vortex Whisper",
+gesture_titles = [
+    "All The Best",
+    "Loser",
+    "Sorry",
+    "Fine",
+    "Call Me",
+    "Hi",
 ]
 
 mock_cards = [
     {
         "id": "card_1",
-        "title": random.choice(random_titles),
-        "description": "Detect left-to-right swipe gestures and trigger navigation actions.",
-        "image": "https://picsum.photos/seed/swipe-left/180/120",
+        "title": gesture_titles[0],
+        "description": "The most common hand sign used to wish someone all the best, often used to symbolise luck or hope",
+        "image": "./both_thumbs_up.jpg",
         "button": "Try Now",
     },
     {
         "id": "card_2",
-        "title": random.choice(random_titles),
-        "description": "Handle right-to-left swipes to reveal controls and options.",
-        "image": "https://picsum.photos/seed/swipe-right/180/120",
+        "title": gesture_titles[1],
+        "description": "You extend both arms and point both thumbs toward the ground. A double thumbs-down is the ultimate universal signal for double failure or total disapproval",
+        "image": "./loser_down.avif",
         "button": "Try Now",
     },
     {
         "id": "card_3",
-        "title": random.choice(random_titles),
-        "description": "Support pinch-to-zoom gesture recognition for detail inspection.",
-        "image": "https://picsum.photos/seed/pinch-zoom/180/120",
+        "title": gesture_titles[2],
+        "description": "Holding your ears with both hands (often while crossing your arms or slightly squatting) is a classic gesture used to express sincere apology, regret, or asking for forgiveness.",
+        "image": "./sorry.jpg",
         "button": "Try Now",
     },
     {
         "id": "card_4",
-        "title": random.choice(random_titles),
-        "description": "Long-press and hold gestures for context menus and tools.",
-        "image": "https://picsum.photos/seed/hold-press/180/120",
+        "title": gesture_titles[3],
+        "description": "A single thumbs up is the most common hand gesture for fine, signifying that everything is under control, approved, or understood. It is a versatile all-purpose sign used to replace verbal phrases like sounds good, okay, or got it",
+        "image": "./fine_thumbs_up.png",
         "button": "Try Now",
     },
     {
-        "id": "card_11",
-        "title": random.choice(random_titles),
-        "description": "Detect left-to-right swipe gestures and trigger navigation actions.",
-        "image": "https://picsum.photos/seed/swipe-left/180/120",
+        "id": "card_5",
+        "title": gesture_titles[4],
+        "description": "The sign is made by extending your thumb and little finger while keeping your middle three fingers curled into your palm, then holding it up to your ear. It is a classic, intuitive gesture that mimics the shape of an old-school telephone receiver",
+        "image": "./call_me.jpg",
         "button": "Try Now",
     },
     {
-        "id": "card_21",
-        "title": random.choice(random_titles),
-        "description": "Handle right-to-left swipes to reveal controls and options.",
-        "image": "https://picsum.photos/seed/swipe-right/180/120",
-        "button": "Try Now",
-    },
-    {
-        "id": "card_31",
-        "title": random.choice(random_titles),
-        "description": "Support pinch-to-zoom gesture recognition for detail inspection.",
-        "image": "https://picsum.photos/seed/pinch-zoom/180/120",
-        "button": "Try Now",
-    },
-    {
-        "id": "card_41",
-        "title": random.choice(random_titles),
-        "description": "Long-press and hold gestures for context menus and tools.",
-        "image": "https://picsum.photos/seed/hold-press/180/120",
-        "button": "Try Now",
-    },
-    {
-        "id": "card_111",
-        "title": random.choice(random_titles),
-        "description": "Detect left-to-right swipe gestures and trigger navigation actions.",
-        "image": "https://picsum.photos/seed/swipe-left/180/120",
-        "button": "Try Now",
-    },
-    {
-        "id": "card_211",
-        "title": random.choice(random_titles),
-        "description": "Handle right-to-left swipes to reveal controls and options.",
-        "image": "https://picsum.photos/seed/swipe-right/180/120",
-        "button": "Try Now",
-    },
-    {
-        "id": "card_311",
-        "title": random.choice(random_titles),
-        "description": "Support pinch-to-zoom gesture recognition for detail inspection.",
-        "image": "https://picsum.photos/seed/pinch-zoom/180/120",
-        "button": "Try Now",
-    },
-    {
-        "id": "card_411",
-        "title": random.choice(random_titles),
-        "description": "Long-press and hold gestures for context menus and tools.",
-        "image": "https://picsum.photos/seed/hold-press/180/120",
+        "id": "card_6",
+        "title": gesture_titles[5],
+        "description": "Raising your hand to about shoulder height and moving it side-to-side. It’s the universal hello or hi often used when you're passing someone quickly",
+        "image": "./hi.avif",
         "button": "Try Now",
     },
 ]
+
+
+def get_base64_image(image_path):
+    with open(image_path, "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode()
+
 
 for card_data in mock_cards:
     with st.container():
@@ -187,7 +151,7 @@ for card_data in mock_cards:
         with c1:
             st.markdown(
                 f"""
-                <div class='card-image'><img src='{card_data['image']}' alt='{card_data['title']}' /></div>
+                <div class='card-image'><img src='data:image/png;base64,{get_base64_image(card_data['image'])}' alt='{card_data['title']}' /></div>
                 """,
                 unsafe_allow_html=True,
             )

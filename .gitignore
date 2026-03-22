@@ -66,6 +66,14 @@ model_1hand.pkl
 gesture_dataset.csv
 dataset/
 
+# Images
+*.png
+*.jpg
+*.avif
+
+# Animations
+*.json
+
 # OS generated files
 Thumbs.db
 ehthumbs.db
